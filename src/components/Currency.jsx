@@ -2,18 +2,33 @@ import { useState } from "react";
 
 
 function Currency() {
-    const [country,setCountry] = useState("Indian rupee");
+    const [country,setCountry] = useState("INR/USD");
     const [rate,setRate] = useState("0");
-    const [amount,setAmount] = useState("0");
-    const SubmitFunc = (e) =>{
+    const [amnt,setAmnt] = useState("0");
+    const SubmitFunc = async(e) =>{
         e.preventDefault();
+        const basesymbol = e.target.elements.basesymbol.value;
+        const anssymbol = e.target.elements.anssymbol.value;
+        const amount = e.target.elements.amount.value;
+        await fetch("http://localhost:8000/currency_conv",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            basesymbol : basesymbol,
+            anssymbol : anssymbol,
+            amount : amount
+        })}).then(r=>{
+            r.json().then(data=>{
+                setCountry(data.symbol)
+                setRate(data.rate)
+                setAmnt(data.amount)
+            })
+        })
         
     }
     return (
         <>
-            <div className="container flex flex-col w-full h-full justify-center  mt-12 md:flex-row">
+            <div className="container flex flex-col w-full h-full justify-center items-center mt-12 md:flex-row">
                 <div className="form-container flex flex-col p-4  w-full lg:w-1/2">
-                    <form className="curren-form flex flex-col justify-center items-center " method ="get">
+                    <form className="curren-form flex flex-col justify-center items-center " onSubmit={SubmitFunc} >
                         
                         <div className="select1 w-full lg:w-3/4 my-4">
                         <select name="basesymbol" className="form-select p-2 w-full cursor-pointer rounded-md border border-slate-500 " aria-label="Default select example">
@@ -353,11 +368,11 @@ function Currency() {
                                 <input type="number" name="amount" className="form-select p-2 w-full rounded-md border border-slate-500" placeholder="Enter the amount" />
                         </div>
                         <div className="submit-cont w-full lg:w-3/4 my-4">
-                            <input type="submit" value="Submit" className="form-select cursor-pointer hover:bg-zinc-400 transition-all duration-500 p-2 w-full rounded-md  bg-zinc-300" onClick={SubmitFunc} />    
+                            <input type="submit" value="Submit" className="form-select cursor-pointer hover:bg-zinc-400 transition-all duration-500 p-2 w-full rounded-md  bg-zinc-300"/>    
                         </div>     
                     </form>
                 </div>
-                <div className="out-container flex flex-col p-4  w-3/4 lg:w-1/3 border border-black rounded-md">
+                <div className="out-container flex flex-col p-4  w-3/4 lg:w-1/3 border border-cyan-200 bg-purple-100 shadow-md shadow-cyan-800 rounded-md">
                     <div className="count-name m-3">
                         <h1 className="text-2xl font-bold text-center">{country}</h1>
                     </div>
@@ -366,7 +381,7 @@ function Currency() {
                         <h1 className="text-xl text-center">Rate : {rate}</h1>
                     </div>
                     <div className="total-container m-3">
-                        <h1 className="text-xl text-center">Total : {amount}</h1>
+                        <h1 className="text-xl text-center">Total : {amnt}</h1>
                     </div>
                     </div>
                 </div>
