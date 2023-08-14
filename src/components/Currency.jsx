@@ -1,12 +1,15 @@
 import { useState } from "react";
+import Loader from "./Loader";
 
 
 function Currency() {
     const [country,setCountry] = useState("INR/USD");
     const [rate,setRate] = useState("0");
     const [amnt,setAmnt] = useState("0");
+    const [loading,setLoading] = useState(true);
     const SubmitFunc = async(e) =>{
         e.preventDefault();
+        setLoading(true)
         const basesymbol = e.target.elements.basesymbol.value;
         const anssymbol = e.target.elements.anssymbol.value;
         const amount = e.target.elements.amount.value;
@@ -17,6 +20,7 @@ function Currency() {
             amount : amount
         })}).then(r=>{
             r.json().then(data=>{
+                setLoading(false)
                 setCountry(data.symbol)
                 setRate(data.rate)
                 setAmnt(data.amount)
@@ -372,7 +376,7 @@ function Currency() {
                         </div>     
                     </form>
                 </div>
-                <div className="out-container flex flex-col p-4  w-3/4 lg:w-1/3 border border-cyan-200 bg-purple-100 shadow-md shadow-cyan-800 rounded-md">
+                <div className="out-container flex flex-col p-4  w-3/4 lg:w-1/3 border  shadow-md shadow-black rounded-md">
                     <div className="count-name m-3">
                         <h1 className="text-2xl font-bold text-center">{country}</h1>
                     </div>
@@ -383,6 +387,7 @@ function Currency() {
                     <div className="total-container m-3">
                         <h1 className="text-xl text-center">Total : {amnt}</h1>
                     </div>
+                    {loading && <Loader/>}
                     </div>
                 </div>
             </div>

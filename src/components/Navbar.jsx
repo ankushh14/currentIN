@@ -24,9 +24,9 @@ function Navbar() {
                     <i className='bx bx-money-withdraw'></i>Currency Converter
                 </li>
                 </NavLink>
-                <NavLink to="/shares">
+                <NavLink to="/coins">
                 <li className="list-items text-stone-700 m-3 lg:m-0 lg:mx-4 cursor-pointer text-center lg:hover:text-slate-950 lg:transition-colors" onClick={()=>{setNav(!Nav)}}>
-                    <i className='bx bxs-report' ></i>Share Prices
+                    <i className='bx bxs-report' ></i>Coin Prices
                 </li>
                 </NavLink>
             </ul>

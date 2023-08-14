@@ -13,7 +13,7 @@ function App(){
         <Routes>
           <Route exact path="/" element ={<Home/>}/>
           <Route path = "/exchange" element={<Currency/>}/>
-          <Route path="/shares" element={<Shares/>}/>
+          <Route path="/coins" element={<Shares/>}/>
         </Routes>
       </BrowserRouter>
     </>

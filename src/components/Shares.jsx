@@ -1,19 +1,50 @@
 import Sharecards from "./ShareCars/Sharecards";
-import logos from "../assets/stockimage.svg"
+import Loader from "./Loader";
+import { useEffect, useState } from "react";
+
 
 function Shares(){
+    const [data,setData] = useState([]);
+    const [page,setPage] = useState(0);
+    const [loading,setLoading] = useState(true);
+    
+    useEffect(()=>{
+        fetchData();
+    },[page])
+
+    const fetchData = async()=>{
+        const response = await fetch(`http://localhost:8000/coinprice?page=${page}`);
+        const resdata = await response.json();
+        setData((prev)=>[...prev,...resdata]);
+        setLoading(false)
+    }
+
+
+
+
+
+    const scrollbehavior = ()=>{
+        if (window.innerHeight + document.documentElement.scrollTop +1 >= document.documentElement.scrollHeight) {
+            setLoading(true);
+           setPage((prev)=>prev+1);
+        }   
+       }
+       useEffect(()=>{
+           window.addEventListener("scroll",scrollbehavior)
+       },[])
+    
     return(
         <>
             <div className="main-cont mt-2 flex flex-wrap justify-center m-1 lg:m-4">
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
-                <Sharecards name={"Tata Consultancy Services"} symbol={"TCS"} currency={"INR"} country={"India"} logo={logos}/>
+                {
+                     data.map(r=>{
+                        return <Sharecards name={r.naming} symbol={r.symbol} price={r.price}  logo={r.logo}/>
+                     })
+                }
+                
             </div>
+            {loading && <Loader/>}
+            
         </>
     )
 }
