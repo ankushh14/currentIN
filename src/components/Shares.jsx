@@ -13,7 +13,7 @@ function Shares(){
     },[page])
 
     const fetchData = async()=>{
-        const response = await fetch(`http://localhost:8000/coinprice?page=${page}`);
+        const response = await fetch(`${import.meta.env.VITE_API}/coinprice?page=${page}`);
         const resdata = await response.json();
         setData((prev)=>[...prev,...resdata]);
         setLoading(false)

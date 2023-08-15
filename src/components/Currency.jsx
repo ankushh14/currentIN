@@ -13,7 +13,7 @@ function Currency() {
         const basesymbol = e.target.elements.basesymbol.value;
         const anssymbol = e.target.elements.anssymbol.value;
         const amount = e.target.elements.amount.value;
-        await fetch("http://localhost:8000/currency_conv",{method:"POST",headers:{"Content-Type":"application/json"},
+        await fetch(`${import.meta.env.VITE_API}/currency_conv`,{method:"POST",headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
             basesymbol : basesymbol,
             anssymbol : anssymbol,
