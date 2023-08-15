@@ -21,8 +21,6 @@ function Shares(){
 
 
 
-
-
     const scrollbehavior = ()=>{
         if (window.innerHeight + document.documentElement.scrollTop +1 >= document.documentElement.scrollHeight) {
             setLoading(true);
@@ -35,7 +33,7 @@ function Shares(){
     
     return(
         <>
-            <div className="main-cont mt-2 flex flex-wrap justify-center m-1 lg:m-4">
+            <div className="main-cont  flex flex-wrap justify-center m-1 mt-0 lg:m-4">
                 {
                      data.map(r=>{
                         return <Sharecards name={r.naming} symbol={r.symbol} price={r.price}  logo={r.logo}/>

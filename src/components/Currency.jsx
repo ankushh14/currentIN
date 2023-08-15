@@ -35,7 +35,7 @@ function Currency() {
                     <form className="curren-form flex flex-col justify-center items-center " onSubmit={SubmitFunc} >
                         
                         <div className="select1 w-full lg:w-3/4 my-4">
-                        <select name="basesymbol" className="form-select p-2 w-full cursor-pointer rounded-md border border-slate-500 " aria-label="Default select example">
+                        <select name="basesymbol" className="form-select p-2 w-full cursor-pointer rounded-md border border-slate-500 " aria-label="Default select example" required>
                                 <option defaultValue="INR" label="Indian rupee">INR</option>
                                 <option value={"USD"} label="US dollar">USD</option>
                                 <option value="EUR" label="Euro" >EUR</option>
@@ -202,7 +202,7 @@ function Currency() {
                             </select>
                         </div>  
                         <div className="select2 w-full lg:w-3/4 my-4">
-                        <select name="anssymbol" className="form-select p-2 w-full cursor-pointer rounded-md border border-slate-500 " aria-label="Default select example">
+                        <select name="anssymbol" className="form-select p-2 w-full cursor-pointer rounded-md border border-slate-500 " aria-label="Default select example" required>
                                 <option defaultValue="USD" label="US dollar">USD</option>
                                 <option value="EUR" label="Euro">EUR</option>
                                 <option value="JPY" label="Japanese yen">JPY</option>
@@ -369,14 +369,14 @@ function Currency() {
                             </select>
                         </div> 
                         <div className="amount-cont w-full lg:w-3/4 my-4">
-                                <input type="number" name="amount" className="form-select p-2 w-full rounded-md border border-slate-500" placeholder="Enter the amount" />
+                                <input type="number" name="amount" className="form-select p-2 w-full rounded-md border border-slate-500" placeholder="Enter the amount" required />
                         </div>
                         <div className="submit-cont w-full lg:w-3/4 my-4">
                             <input type="submit" value="Submit" className="form-select cursor-pointer hover:bg-zinc-400 transition-all duration-500 p-2 w-full rounded-md  bg-zinc-300"/>    
                         </div>     
                     </form>
                 </div>
-                <div className="out-container flex flex-col p-4  w-3/4 lg:w-1/3 border  shadow-md shadow-black rounded-md">
+                <div className="out-container flex flex-col p-4  w-3/4 lg:w-1/3 border mb-8  shadow-md shadow-black rounded-md">
                     <div className="count-name m-3">
                         <h1 className="text-2xl font-bold text-center">{country}</h1>
                     </div>
