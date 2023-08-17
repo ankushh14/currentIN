@@ -7,6 +7,17 @@ function Shares(){
     const [data,setData] = useState([]);
     const [page,setPage] = useState(0);
     const [loading,setLoading] = useState(true);
+
+    useEffect(()=>{
+        window.addEventListener("scroll",scrollbehavior);
+        startfunc();
+        fetchData();
+   },[])
+
+    const startfunc = async() =>{
+        const response = await fetch(`${import.meta.env.VITE_API}`);
+        console.log(response.status);
+    }
     
     useEffect(()=>{
         fetchData();
@@ -27,9 +38,7 @@ function Shares(){
            setPage((prev)=>prev+1);
         }   
        }
-       useEffect(()=>{
-           window.addEventListener("scroll",scrollbehavior)
-       },[])
+       
     
     return(
         <>

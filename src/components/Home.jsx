@@ -1,15 +1,8 @@
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
-import { useEffect } from "react";
 
 function Home(){
-    const startfunc = async() =>{
-        const response = await fetch(`${import.meta.env.VITE_API}`);
-        console.log(response.status);
-    }
-    useEffect(()=>{
-        startfunc();
-    },[])
+    
     return(
         <>
             <div className="main-landing  bg-center   w-full h-screen bg-[url('https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] ">
