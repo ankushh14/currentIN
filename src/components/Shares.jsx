@@ -8,9 +8,9 @@ function Shares(){
     const [page,setPage] = useState(0);
     const [loading,setLoading] = useState(true);
 
-    useEffect(async()=>{
+    useEffect(()=>{
         window.addEventListener("scroll",scrollbehavior);
-        await startfunc();
+        startfunc();
         fetchData();
    },[])
 
